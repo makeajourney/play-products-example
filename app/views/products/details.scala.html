@@ -1,0 +1,21 @@
+@(product: Product)(implicit messages: Messages)
+
+@main(Messages("products.details", product.name)) {
+  @* barcode tag 호출 *@
+  <h2>
+    @tags.barcode(product.ean)
+    @Messages("products.details", product.name)
+  </h2>
+
+  @* product 상세사항 출력 *@
+  <dl class="dl-horizontal">
+    <dt>@Messages("ean")</dt>
+    <dd>@product.ean</dd>
+
+    <dt>@Messages("name")</dt>
+    <dd>@product.name</dd>
+
+    <dt>@Messages("description")</dt>
+    <dd>@product.description</dd>
+  </dl>
+}
