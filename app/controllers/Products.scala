@@ -10,4 +10,11 @@ class Products @Inject() (val messagesApi: MessagesApi) extends Controller with 
     val products = Product.findAll
     Ok(views.html.products.list(products))
   }
+
+  def show(ean: Long) = Action {
+    implicit request => Product.findByEan(ean).map {
+      // rendering product details
+      product => Ok(views.html.products.details(product))
+    }.getOrElse(NotFound)  // return page 404
+  }
 }
