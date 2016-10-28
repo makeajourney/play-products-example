@@ -4,7 +4,7 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
-@(title: String)(content: Html)(implicit messages: Messages) @* parameter list *@
+@(title: String)(content: Html)(implicit flash: Flash, messages: Messages) @* parameter list *@
 
 <!DOCTYPE html>
 <html>
@@ -20,8 +20,32 @@
             <div class="navbar-header">
               <a class="navbar-brand" href="@routes.HomeController.index()">@Messages("application.name")</a>
             </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active">
+                  <a href="@routes.Products.list()">
+                    @Messages("Products.list.navigation")
+                  </a>
+                </li>
+                <li>
+                  <a href="@routes.Products.newProduct()">
+                    <i class="icon-plus icon-white"></i>@Messages("products.new.command")
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="container">
+            @if(flash.get("success").isDefined) {
+              <div class="alert alert-success">
+                @flash.get("success")
+              </div>
+            }
+            @if(flash.get("error").isDefined) {
+              <div class="alert alert-danger">
+                @flash.get("error")
+              </div>
+            }
             @* And here's where we render the `Html` object containing
              * the page content. *@
             @content

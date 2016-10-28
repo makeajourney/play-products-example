@@ -1,4 +1,4 @@
-@(products: List[Product])(implicit messages: Messages) @* template parameter *@
+@(products: List[Product])(implicit flash: Flash, messages: Messages) @* template parameter *@
 
 @main(Messages("application.name")) {
   <dl class="products">
